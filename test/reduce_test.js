@@ -99,6 +99,48 @@ exports.testReturnValueIsFinalReturn = function(test) {
     test.done();
 };
 
+exports.testReduce1SetsAccumulatorToFirstValue = function(test) {
+    test.expect(2);
+    var testFunc = function(acc) {
+        test.equals(1,acc);
+    };
+
+    R.reduce1(testFunc, [1,2]);
+    R.reduceRight1(testFunc, [2,1]);
+
+    test.done();
+};
+
+exports.testReduce1AccumulatesCorrectValue = function(test) {
+    var sum = R.reduce1(function(acc, value) {return acc+value;});
+
+    test.equals(6, sum([1,2,3]));
+    test.done();
+};
+
+exports.testReduceRight1AccumulatesCorrectValue = function(test) {
+    var sum = R.reduceRight1(function(acc, value) {return acc+value;});
+
+    test.equals(6, sum([1,2,3]));
+    test.done();
+};
+
+exports.testReduce1WithEmptyArrayThrowsError = function(test) {
+    test.throws(function() {
+        R.reduce1(function(){}, []);
+    }, Error);
+
+    test.done();
+};
+
+exports.testReduceRight1WithEmptyArrayThrowsError = function(test) {
+    test.throws(function() {
+        R.reduceRight1(function(){}, []);
+    }, Error);
+
+    test.done();
+};
+
 exports.testCanCurryReduce = function(test) {
     var reduceAdd = R.reduce(function(acc,value) {return acc+value;});
 
@@ -110,5 +152,19 @@ exports.testCanCurryReduceRight = function(test) {
     var reduceAdd = R.reduceRight(function(acc,value) {return acc+value;});
 
     test.equals(6, reduceAdd(0, [1,2,3]));
+    test.done();
+};
+
+exports.testCanCurryReduce1 = function(test) {
+    var sum = R.reduce1(function(acc,value) {return acc+value;});
+
+    test.equals(6,sum([1,2,3]));
+    test.done();
+};
+
+exports.testCanCurryReduceRight1 = function(test) {
+    var sum = R.reduceRight1(function(acc,value) {return acc+value;});
+
+    test.equals(6,sum([1,2,3]));
     test.done();
 };

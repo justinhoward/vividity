@@ -25,7 +25,7 @@ for ( ; i < iLen; i++ ) {
 
 var C = _dereq_('./curry.js');
 
-exports.compose = C.autoCurry( function(f,g) {
+exports.compose = C.autoCurry(function(f,g) {
     return function(x) {
         return f.call(this, g.call(this, x));
     };
@@ -72,7 +72,7 @@ exports.flip = function(func) {
 
 var C = _dereq_('./curry.js');
 
-exports.map = C.autoCurry( function(func, array) {
+exports.map = C.autoCurry(function(func, array) {
     var results = [];
     var i = 0, iLen = array.length;
     for (; i < iLen; i++) {
@@ -85,23 +85,54 @@ exports.map = C.autoCurry( function(func, array) {
 'use strict';
 var C = _dereq_('./curry.js');
 
-exports.reduce = C.autoCurry( function(func, accumulator, array) {
-    var i = 0, iLen = array.length;
+var reduceGeneric = function(func, accumulator, array, start) {
+    var i = start, iLen = array.length;
     for(; i < iLen; i++) {
         accumulator = func.call(this, accumulator, array[i]);
     }
 
     return accumulator;
-});
+};
 
-exports.reduceRight = C.autoCurry( function(func, accumulator, array) {
-    var i = array.length;
+var reduceRightGeneric = function(func, accumulator, array, length) {
+    var i = length;
     while(i--) {
         accumulator = func.call(this, accumulator, array[i]);
     }
 
     return accumulator;
-});
+};
+
+var reduce = function(func, accumulator, array) {
+    return reduceGeneric.call(this, func, accumulator, array, 0);
+};
+
+var reduceRight = function(func, accumulator, array) {
+    return reduceRightGeneric.call(this, func, accumulator, array, array.length);
+};
+
+var assertNotEmpty = function(array) {
+    if (!array.length)
+        throw new Error('Array must not be empty');
+};
+
+var reduce1 = function(func, array) {
+    assertNotEmpty(array);
+    var accumulator = array[0];
+    return reduceGeneric.call(this, func, accumulator, array, 1);
+};
+
+var reduceRight1 = function(func, array) {
+    assertNotEmpty(array);
+    var end = array.length-1;
+    var accumulator = array[end];
+    return reduceGeneric.call(this, func, accumulator, array, end);
+};
+
+exports.reduce = C.autoCurry(reduce);
+exports.reduceRight = C.autoCurry(reduceRight);
+exports.reduce1 = C.autoCurry(reduce1);
+exports.reduceRight1 = C.autoCurry(reduceRight1);
 },{"./curry.js":3}]},{},[1])
 (1)
 });
