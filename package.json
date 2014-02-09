@@ -1,0 +1,31 @@
+{
+  "name": "vividity",
+  "description": "A functional programming library.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Justin Howard",
+    "url": "https://github.com/justinhoward"
+  },
+  "license": "MIT",
+  "keywords": [
+    "functional",
+    "curry",
+    "map",
+    "compose"
+  ],
+  "homepage": "https://github.com/justinhoward/vividity",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-nodeunit": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "browserify": "~3.26.0",
+    "grunt-browserify": "~1.3.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-concat": "~0.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justinhoward/vividity"
+  }
+}
