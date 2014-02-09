@@ -1,4 +1,4 @@
-var flip = require('../lib/flip.js');
+var F = require('../lib/flip.js');
 
 function getHi() {
     return function( first, last ) {
@@ -7,19 +7,18 @@ function getHi() {
 }
 
 function getGreetContext() {
-    return function( greeting, message )
-    {
+    return function( greeting, message ) {
         return greeting + ' ' + this + ', ' + message;
     };
 }
 
 exports.testReturnsFunction = function(test) {
-    test.ok(flip.flip(getHi()) instanceof Function);
+    test.ok(F.flip(getHi()) instanceof Function);
     test.done();
 };
 
 exports.testReversesArguments = function(test) {
-    var flipped = flip.flip(getHi());
+    var flipped = F.flip(getHi());
 
     test.equal('Hello Howard Justin', flipped('Justin', 'Howard'));
     test.done();
@@ -27,7 +26,7 @@ exports.testReversesArguments = function(test) {
 
 exports.testPreservesContext = function(test)
 {
-    var flipped = flip.flip(getGreetContext());
+    var flipped = F.flip(getGreetContext());
     var result = flipped.call( 'Justin', 'how are you doing?', 'Hello' );
 
     test.equal('Hello Justin, how are you doing?', result);
