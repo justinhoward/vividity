@@ -1,0 +1,20 @@
+{
+    "node": true,
+    "eqeqeq": true,
+    "immed": true,
+    "latedef": true,
+    "noempty": true,
+    "nonbsp": true,
+    "undef": true,
+    "unused": true,
+    "trailing": true,
+    "maxparams": 5,
+    "maxdepth": 5,
+    "maxstatements": 25,
+    "maxcomplexity": 10,
+    "maxlen": 120,
+
+    "expr": true,
+
+    "predef": ["describe", "it"]
+}

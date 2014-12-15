@@ -1,18 +1,11 @@
-var modules = [
-    require('./lib/curry.js'),
-    require('./lib/compose.js'),
-    require('./lib/flip.js'),
-    require('./lib/map.js'),
-    require('./lib/reduce.js')
-];
-
-var i = 0, iLen = modules.length;
-var exp;
-for ( ; i < iLen; i++ ) {
-    for ( exp in modules[ i ] ) {
-        if (!modules[i].hasOwnProperty(exp))
-            continue;
-
-        exports[exp] = modules[i][exp];
-    }
-}
+module.exports = {
+    curry: require('./lib/curry').curry,
+    autoCurry: require('./lib/curry').autoCurry,
+    compose: require('./lib/compose').compose,
+    flip: require('./lib/flip').flip,
+    map: require('./lib/map').map,
+    reduce: require('./lib/reduce').reduce,
+    reduceRight: require('./lib/reduce').reduceRight,
+    reduce1: require('./lib/reduce').reduce1,
+    reduceRight1: require('./lib/reduce').reduceRight1
+};
