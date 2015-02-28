@@ -16,13 +16,17 @@
   "homepage": "https://github.com/justinhoward/vividity",
   "devDependencies": {
     "chai": "^1.10.0",
-    "mocha": "^2.0.1"
+    "codeclimate-test-reporter": "0.0.4",
+    "istanbul": "^0.3.6",
+    "mocha": "^2.1.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/justinhoward/vividity"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "cover": "istanbul cover _mocha",
+    "publish-coverage": "codeclimate < coverage/lcov.info"
   }
 }
